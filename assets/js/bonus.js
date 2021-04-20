@@ -3,12 +3,32 @@ $(function(){
   var nextIcon = $(".carousel i.next")
   var prevIcon = $(".carousel i.prev")
 
-  
   //creazione controls
   var numeroImmagini = countSlides();
   
   createControls(numeroImmagini)
   addActiveControl();
+
+  var dots = $(".slider-controls .circle");
+  var images = $(".c-container img")
+
+  var clickedIndex =0;
+  $(".circle").click(function(){
+    console.log(this)
+    console.log("cliccato")
+    console.log(dots.length)
+    var found = false;
+    for(var b = 0; b<dots.length && (found==false);b++){
+      console.log("Elemento : "+dots.eq(b))
+      if(dots[b]== this){
+        console.log("trovato")
+        clickedIndex = b;
+        found = true;
+      }
+    }
+    console.log(clickedIndex)
+    activateSlide(clickedIndex)
+  })
 
   //SLIDING ACTION
   nextIcon.click( nextPic)
@@ -81,10 +101,18 @@ $(function(){
     $(".circle:last-child").addClass("last");
   }
 
+  function activateSlide(index){
+    //REMOVE ACTIVE  from IMAGES
+    for(var a=0; a<images.length;a++){
+      if(images.eq(a).hasClass("active"))
+       images.eq(a).removeClass("active")
+       dots.eq(a).removeClass("active")
+    }
+    images.eq(index).addClass("active")
+    dots.eq(index).addClass("active")
 
-
-
-
+    
+  }
 
 
 })
