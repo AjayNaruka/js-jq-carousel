@@ -50,18 +50,15 @@ $(function(){
 
     var activeSlide = $(".carousel img.active");
     var activeCircle = $(".circle.active");
-    
+
+    activeSlide.removeClass("active")
+    activeCircle.removeClass("active")
+
     if(direction =="next"){ // CASO NEXT
     if(activeSlide.hasClass("last")){
-      activeSlide.removeClass("active")
-      activeCircle.removeClass("active")
-
       $("img.first").addClass("active")
       $(".circle.first").addClass("active")
     }else{
-      //RIMUOVO ACTIVE
-    activeSlide.removeClass("active")
-    activeCircle.removeClass("active")
     //DO ACTIVE AL NEXT
     activeSlide.next().addClass("active")
     activeCircle.next().addClass("active")
@@ -70,15 +67,9 @@ $(function(){
     } // CASO PREV
     else if(direction =="prev"){
     if(activeSlide.hasClass("first")){
-      activeSlide.removeClass("active")
-      activeCircle.removeClass("active")
-
       $("img.last").addClass("active")
       $(".circle.last").addClass("active")
     }else{
-      //RIMUOVO ACTIVE
-    activeSlide.removeClass("active")
-    activeCircle.removeClass("active")
     //DO ACTIVE AL NEXT
     activeSlide.prev().addClass("active")
     activeCircle.prev().addClass("active")
@@ -86,6 +77,8 @@ $(function(){
 
     }
   }
+
+  
   function nextPic(){
 
     // CERCO SLIDE ACTIVE
