@@ -14,11 +14,12 @@ $(function(){
   var images = $(".c-container img")
 
   //RICERCA INDEX CLICCATO
-  var clickedIndex =0;
   $(".circle").click(function(){
-    console.log(this)
-    console.log("cliccato")
-    console.log(dots.length)
+   // console.log(this)
+   // console.log("cliccato")
+   // console.log(dots.length)
+    /*
+    MIO METODO LUNGO
     var found = false;
     for(var b = 0; b<dots.length && (found==false);b++){
       console.log("Elemento : "+dots.eq(b))
@@ -28,16 +29,63 @@ $(function(){
         found = true;
       }
     }
-    console.log(clickedIndex)
+    console.log(clickedIndex) */
+    var clickedIndex = $(this).index();
     activateSlide(clickedIndex)
   })
 
 
   //SLIDING ACTION ( senza cliccare sui pallini)
-  nextIcon.click( nextPic)
-  prevIcon.click( prevPic)
+  
+  nextIcon.click(function(){
+    move("next")
+  })
+  prevIcon.click(function(){
+    move("prev")
+  })
 
   //FUNZIONI
+
+  function move(direction){
+
+    var activeSlide = $(".carousel img.active");
+    var activeCircle = $(".circle.active");
+    
+    if(direction =="next"){ // CASO NEXT
+    if(activeSlide.hasClass("last")){
+      activeSlide.removeClass("active")
+      activeCircle.removeClass("active")
+
+      $("img.first").addClass("active")
+      $(".circle.first").addClass("active")
+    }else{
+      //RIMUOVO ACTIVE
+    activeSlide.removeClass("active")
+    activeCircle.removeClass("active")
+    //DO ACTIVE AL NEXT
+    activeSlide.next().addClass("active")
+    activeCircle.next().addClass("active")
+    
+    }
+    } // CASO PREV
+    else if(direction =="prev"){
+    if(activeSlide.hasClass("first")){
+      activeSlide.removeClass("active")
+      activeCircle.removeClass("active")
+
+      $("img.last").addClass("active")
+      $(".circle.last").addClass("active")
+    }else{
+      //RIMUOVO ACTIVE
+    activeSlide.removeClass("active")
+    activeCircle.removeClass("active")
+    //DO ACTIVE AL NEXT
+    activeSlide.prev().addClass("active")
+    activeCircle.prev().addClass("active")
+    }
+
+    }
+  }
   function nextPic(){
 
     // CERCO SLIDE ACTIVE
@@ -106,15 +154,19 @@ $(function(){
 
   function activateSlide(index){
     //REMOVE ACTIVE  from IMAGES
+    /*
+    MIO METODO LUNGO
     for(var a=0; a<images.length;a++){
       if(images.eq(a).hasClass("active"))
        images.eq(a).removeClass("active")
        dots.eq(a).removeClass("active")
     }
     images.eq(index).addClass("active")
-    dots.eq(index).addClass("active")
-
-    
+    dots.eq(index).addClass("active") */
+    images.removeClass("active"); //Rimuovo da tutte le immagini la classe active
+    dots.removeClass("active"); //Rimuovo da tutti i pallini la classe active
+    images.eq(index).addClass("active"); //Metto la classe active alla mia immagine
+    dots.eq(index).addClass("active"); //Metto la classe active al mio pallino
   }
 
 
