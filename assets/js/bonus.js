@@ -3,15 +3,17 @@ $(function(){
   var nextIcon = $(".carousel i.next")
   var prevIcon = $(".carousel i.prev")
 
-  //creazione controls
+  //creazione controls in base al numero di immagini
   var numeroImmagini = countSlides();
-  
   createControls(numeroImmagini)
+  // INSERISCO COME DEFAULT LAST,FIRST E ACTIVE
   addActiveControl();
 
+  // creo array per indiccare le singole slide e controlli
   var dots = $(".slider-controls .circle");
   var images = $(".c-container img")
 
+  //RICERCA INDEX CLICCATO
   var clickedIndex =0;
   $(".circle").click(function(){
     console.log(this)
@@ -30,11 +32,12 @@ $(function(){
     activateSlide(clickedIndex)
   })
 
-  //SLIDING ACTION
+
+  //SLIDING ACTION ( senza cliccare sui pallini)
   nextIcon.click( nextPic)
   prevIcon.click( prevPic)
 
-  
+  //FUNZIONI
   function nextPic(){
 
     // CERCO SLIDE ACTIVE
